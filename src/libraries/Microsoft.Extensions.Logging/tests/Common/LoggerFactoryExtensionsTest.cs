@@ -165,6 +165,157 @@ namespace Microsoft.Extensions.Logging.Test
             // Assert
             Assert.NotNull(logger);
         }
+
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactory.CreateLogger(string)"/> method
+        /// returns the same instance when called multiple times with a simple type full name as argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreate_CategoryName_SimpleType_ReturnsSameInstance()
+        {
+            // Arrange
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger(typeof(TestType).FullName);
+            var logger2 = factory.CreateLogger(typeof(TestType).FullName);
+
+            // Assert
+            Assert.Equal(logger1, logger2);
+        }
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactoryExtensions.CreateLogger(ILoggerFactory, System.Type)"/> method
+        /// returns the same instance when called multiple times with a simple type as argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreate_Type_SimpleType_ReturnsSameInstance()
+        {
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger(typeof(TestType));
+            var logger2 = factory.CreateLogger(typeof(TestType));
+
+            Assert.Equal(logger1, logger2);
+        }
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactoryExtensions.CreateLogger{T}(ILoggerFactory)"/> method
+        /// returns the same instance when called multiple times with a simple type as generic type argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreateOfT_SimpleType_ReturnsSameInstance()
+        {
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger<TestType>();
+            var logger2 = factory.CreateLogger<TestType>();
+
+            Assert.IsType<Logger<TestType>>(logger1);
+            Assert.IsType<Logger<TestType>>(logger2);
+            Assert.Equal(logger1, logger2);
+        }
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactory.CreateLogger(string)"/> method
+        /// returns the same instance when called multiple times with a single generic typed type full name as argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreate_CategoryName_SingleGeneric_ReturnsSameInstance()
+        {
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger(typeof(GenericClass<TestType>).FullName);
+            var logger2 = factory.CreateLogger(typeof(GenericClass<TestType>).FullName);
+
+            Assert.Equal(logger1, logger2);
+        }
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactoryExtensions.CreateLogger(ILoggerFactory, System.Type)"/> method
+        /// returns the same instance when called multiple times with a single generic typed type as argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreate_Type_SingleGeneric_ReturnsSameInstance()
+        {
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger(typeof(GenericClass<TestType>));
+            var logger2 = factory.CreateLogger(typeof(GenericClass<TestType>));
+
+            Assert.Equal(logger1, logger2);
+        }
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactoryExtensions.CreateLogger{T}(ILoggerFactory)"/> method
+        /// returns the same instance when called multiple times with a single generic typed type as generic type argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreateOfT_SingleGeneric_ReturnsSameInstance()
+        {
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger<GenericClass<TestType>>();
+            var logger2 = factory.CreateLogger<GenericClass<TestType>>();
+
+            Assert.IsType<Logger<GenericClass<TestType>>>(logger1);
+            Assert.IsType<Logger<GenericClass<TestType>>>(logger2);
+            Assert.Equal(logger1, logger2);
+        }
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactory.CreateLogger(string)"/> method
+        /// returns the same instance when called multiple times with a multiple generic typed type full name as argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreate_CategoryName_DoubleGeneric_ReturnsSameInstance()
+        {
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger(typeof(GenericClass<TestType, SecondTestType>).FullName);
+            var logger2 = factory.CreateLogger(typeof(GenericClass<TestType, SecondTestType>).FullName);
+
+            Assert.Equal(logger1, logger2);
+        }
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactoryExtensions.CreateLogger(ILoggerFactory, System.Type)"/> method
+        /// returns the same instance when called multiple times with a multiple generic typed type as argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreate_Type_DoubleGeneric_ReturnsSameInstance()
+        {
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger(typeof(GenericClass<TestType, SecondTestType>));
+            var logger2 = factory.CreateLogger(typeof(GenericClass<TestType, SecondTestType>));
+
+            Assert.Equal(logger1, logger2);
+        }
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactoryExtensions.CreateLogger{T}(ILoggerFactory)"/> method
+        /// returns the same instance when called multiple times with a multiple generic typed type as generic type argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreateOfT_DoubleGeneric_ReturnsSameInstance()
+        {
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger<GenericClass<TestType, SecondTestType>>();
+            var logger2 = factory.CreateLogger<GenericClass<TestType, SecondTestType>>();
+
+            Assert.IsType<Logger<GenericClass<TestType, SecondTestType>>>(logger1);
+            Assert.IsType<Logger<GenericClass<TestType, SecondTestType>>>(logger2);
+            Assert.Equal(logger1, logger2);
+        }
+
+        /// <summary>
+        /// Checks that the <see cref="LoggerFactory.CreateLogger"/> and <see cref="LoggerFactoryExtensions.CreateLogger"/> methods
+        /// return the same instance when called multiple times with a simple type as argument.
+        /// </summary>
+        [Fact]
+        public void LoggerFactoryCreate_SimpleType_ReturnsSameInstance()
+        {
+            // Arrange
+            var factory = new LoggerFactory();
+            var logger1 = factory.CreateLogger(typeof(TestType).FullName);
+            var logger2 = factory.CreateLogger(typeof(TestType));
+
+            // Assert
+            Assert.Equal(logger1, logger2);
+        }
     }
 
     internal class TestType
