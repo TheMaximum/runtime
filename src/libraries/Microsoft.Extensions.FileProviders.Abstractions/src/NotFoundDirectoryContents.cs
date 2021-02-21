@@ -22,6 +22,14 @@ namespace Microsoft.Extensions.FileProviders
         /// </summary>
         public bool Exists => false;
 
+        /// <summary>
+        /// Private constructor, forcing use of the class through the Singleton instance.
+        /// </summary>
+        private NotFoundDirectoryContents()
+        {
+
+        }
+
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator to an empty collection.</returns>
         public IEnumerator<IFileInfo> GetEnumerator() => Enumerable.Empty<IFileInfo>().GetEnumerator();
