@@ -294,41 +294,5 @@ namespace System.Text.Json.Serialization.Tests
             e = await Assert.ThrowsAsync<JsonException>(() => Serializer.DeserializeWrapper<ClassWithConstructor_SimpleAndComplexParameters>(@"{""MYDECIMAL"":bad}", options));
             Assert.Equal("$.MYDECIMAL", e.Path);
         }
-
-        [Fact]
-        public async Task ClassWithUnsupportedCollectionTypes()
-        {
-            Exception e;
-
-            e = await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.DeserializeWrapper<ClassWithInvalidArray>(@"{""UnsupportedArray"":[]}"));
-            Assert.Contains("System.Int32[,]", e.ToString());
-            // The exception for element types do not contain the parent type and the property name
-            // since the verification occurs later and is no longer bound to the parent type.
-            Assert.DoesNotContain("ClassWithInvalidArray.UnsupportedArray", e.ToString());
-
-            e = await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.DeserializeWrapper<ClassWithInvalidDictionary>(@"{""UnsupportedDictionary"":{}}"));
-            Assert.Contains("System.Int32[,]", e.ToString());
-            Assert.DoesNotContain("ClassWithInvalidDictionary.UnsupportedDictionary", e.ToString());
-        }
-
-        private class ClassWithInvalidArray
-        {
-            public int[,] UnsupportedArray { get; set; }
-
-            public ClassWithInvalidArray(int[,] unsupportedArray)
-            {
-                UnsupportedArray = unsupportedArray;
-            }
-        }
-
-        private class ClassWithInvalidDictionary
-        {
-            public Dictionary<string, int[,]> UnsupportedDictionary { get; set; }
-
-            public ClassWithInvalidDictionary(Dictionary<string, int[,]> unsupportedDictionary)
-            {
-                UnsupportedDictionary = unsupportedDictionary;
-            }
-        }
     }
 }

@@ -34,14 +34,16 @@ namespace System.Text.Json.Serialization.Converters
             // Array
             if (typeToConvert.IsArray)
             {
-                // Verify that we don't have a multidimensional array.
                 if (typeToConvert.GetArrayRank() > 1)
                 {
-                    ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(typeToConvert);
+                    converterType = typeof(MultidimensionalArrayConverter<,>);
+                    elementType = typeToConvert.GetElementType();
                 }
-
-                converterType = typeof(ArrayConverter<,>);
-                elementType = typeToConvert.GetElementType();
+                else
+                {
+                    converterType = typeof(ArrayConverter<,>);
+                    elementType = typeToConvert.GetElementType();
+                }
             }
             // List<> or deriving from List<>
             else if ((actualTypeToConvert = typeToConvert.GetCompatibleGenericBaseClass(typeof(List<>))) != null)

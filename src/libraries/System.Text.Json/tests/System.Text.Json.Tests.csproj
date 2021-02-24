@@ -36,6 +36,7 @@
     <Compile Include="NewtonsoftTests\EnumConverterTests.cs" />
     <Compile Include="NewtonsoftTests\ImmutableCollectionsTests.cs" />
     <Compile Include="NewtonsoftTests\JsonSerializerTests.cs" />
+    <Compile Include="Serialization\MultidimensionalArrayTests.cs" />
     <Compile Include="Serialization\Array.ReadTests.cs" />
     <Compile Include="Serialization\Array.WriteTests.cs" />
     <Compile Include="Serialization\CacheTests.cs" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.IO.Pipelines\src\System.IO.Pipelines.csproj" />
+    <ProjectReference Include="..\src\System.Text.Json.csproj" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">

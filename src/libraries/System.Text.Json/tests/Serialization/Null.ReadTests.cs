@@ -221,19 +221,5 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Null(dict["key"]);
             }
         }
-
-        [Fact]
-        public static void InvalidRootOnRead()
-        {
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<int[,]>("null"));
-
-            var options = new JsonSerializerOptions
-            {
-                IgnoreNullValues = true
-            };
-
-            // We still throw when we have an unsupported root.
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<int[,]>("null", options));
-        }
     }
 }

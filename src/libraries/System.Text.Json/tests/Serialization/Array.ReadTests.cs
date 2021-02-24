@@ -196,9 +196,6 @@ namespace System.Text.Json.Serialization.Tests
 
             // Invalid data
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<List<int?>>(Encoding.UTF8.GetBytes(@"[1,""a""]")));
-
-            // Multidimensional arrays currently not supported
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<int[,]>(Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]")));
         }
 
         public static IEnumerable<object[]> ReadNullJson

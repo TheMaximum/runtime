@@ -256,20 +256,5 @@ namespace System.Text.Json.Serialization.Tests
                 writer.WriteEndObject();
             }
         }
-
-        [Fact]
-        public static void InvalidRootOnWrite()
-        {
-            int[,] arr = null;
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize<int[,]>(arr));
-
-            var options = new JsonSerializerOptions
-            {
-                IgnoreNullValues = true
-            };
-
-            // We still throw when we have an unsupported root.
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize<int[,]>(arr, options));
-        }
     }
 }

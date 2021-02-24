@@ -64,6 +64,7 @@
     <Compile Include="System\Text\Json\Serialization\Attributes\JsonIncludeAttribute.cs" />
     <Compile Include="System\Text\Json\Serialization\Attributes\JsonNumberHandlingAttribute.cs" />
     <Compile Include="System\Text\Json\Serialization\Attributes\JsonPropertyNameAttribute.cs" />
+    <Compile Include="System\Text\Json\Serialization\Converters\Collection\MultidimensionalArrayConverter.cs" />
     <Compile Include="System\Text\Json\Serialization\IgnoreReferenceResolver.cs" />
     <Compile Include="System\Text\Json\Serialization\ReferenceEqualsWrapper.cs" />
     <Compile Include="System\Text\Json\Serialization\ClassType.cs" />
@@ -232,11 +233,9 @@
   <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) or $(TargetFramework.StartsWith('net4'))">
     <Compile Include="System\Collections\Generic\StackExtensions.netstandard.cs" />
     <!-- Common or Common-branched source files -->
-    <Compile Include="$(CommonPath)System\Buffers\ArrayBufferWriter.cs"
-             Link="Common\System\Buffers\ArrayBufferWriter.cs" />
+    <Compile Include="$(CommonPath)System\Buffers\ArrayBufferWriter.cs" Link="Common\System\Buffers\ArrayBufferWriter.cs" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)' or
-                        '$(TargetFramework)' == 'netcoreapp3.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)' or&#xD;&#xA;                        '$(TargetFramework)' == 'netcoreapp3.0'">
     <Reference Include="System.Buffers" />
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />
